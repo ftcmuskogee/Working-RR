@@ -93,41 +93,23 @@ public class Teleop extends LinearOpMode {
             // Makes variables Power1 and Power2 to their respective joystick
             double Power1 = gamepad1.right_stick_y;
             double Power2 = gamepad1.left_stick_y;
-
+            //opens
             if (gamepad1.right_bumper) {
                 Claw.setPosition(1);
             }
             //Closes claws when the left bumper on gamepad 2 is pressed
             else if (gamepad1.left_bumper){
-                Claw.setPosition(0.7);
+                Claw.setPosition(0.8);
             }
             //lift up
-            if (gamepad1.right_bumper) {
-                Lift.setPower(.2);
+            if (gamepad1.right_trigger > .1) {
+                Lift.setPower(.5);
             }
-            else if (gamepad1.left_bumper) {
-                Lift.setPower(-.2);
+            else if (gamepad1.left_trigger > .1) {
+                Lift.setPower(-.5);
             }
             else {
                 Lift.setPower(0);
-            }
-
-            // sets speed depending on if the left trigger on gamepad 1 is pressed
-            if (gamepad1.left_trigger > .1) {
-                speed = .5;
-            }
-            else {
-                speed = 1;
-            }
-
-            while(gamepad1.left_trigger > .1){
-                drive.setWeightedDrivePower(
-                        new Pose2d(
-                                -gamepad1.left_stick_y/2,
-                                -gamepad1.left_stick_x/2,
-                                -gamepad1.right_stick_x/2
-                        )
-                );
             }
 
             //adds data to the driver hub that tells you the coordinates of where the robot is on the field
